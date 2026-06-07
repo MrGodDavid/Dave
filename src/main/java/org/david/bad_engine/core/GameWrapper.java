@@ -1,6 +1,8 @@
 package org.david.bad_engine.core;
 
 import org.david.bad.code.annotation.SingletonClass;
+import org.david.bad_engine.core.logic.GameRenderLogic;
+import org.david.bad_engine.core.logic.GameUpdateLogic;
 
 /**
  * Wrapper class of this game. Creates a window and run a Thread of this game.
@@ -17,15 +19,15 @@ public final class GameWrapper {
     private final GameWindow gameWindow;
     private final GameLoop gameLoop;
 
-    private GameWrapper() {
-        Game game = Game.getInstance();
+    private GameWrapper(GameUpdateLogic updateLogic, GameRenderLogic renderLogic) {
+        Game game = Game.getInstance(updateLogic, renderLogic);
         gameWindow = GameWindow.getInstance(game);
         gameLoop = GameLoop.getInstance(game);
     }
 
-    public static GameWrapper getInstance() {
+    public static GameWrapper getInstance(GameUpdateLogic updateLogic, GameRenderLogic renderLogic) {
         if (instance == null) {
-            instance = new GameWrapper();
+            instance = new GameWrapper(updateLogic, renderLogic);
         }
         return instance;
     }

@@ -1,6 +1,7 @@
 package org.david.bad_engine.core;
 
 import org.david.bad.code.annotation.SingletonClass;
+import org.david.bad_engine.core.logic.GameRenderLogic;
 
 import java.awt.*;
 
@@ -14,13 +15,15 @@ import java.awt.*;
 public final class Renderer {
 
     private static Renderer instance;
+    private final GameRenderLogic renderLogic;
 
-    private Renderer() {
+    private Renderer(GameRenderLogic renderLogic) {
+        this.renderLogic = renderLogic;
     }
 
-    public static Renderer getInstance() {
+    public static Renderer getInstance(GameRenderLogic renderLogic) {
         if (instance == null) {
-            instance = new Renderer();
+            instance = new Renderer(renderLogic);
         }
         return instance;
     }
@@ -32,5 +35,6 @@ public final class Renderer {
      */
     public void render(Graphics2D g2d) {
         // TODO draws stuffs here.
+        renderLogic.render(g2d);
     }
 }

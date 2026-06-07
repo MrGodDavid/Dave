@@ -2,6 +2,8 @@ package org.david.bad_engine.core;
 
 import org.david.bad.auxiliary.Size;
 import org.david.bad.code.annotation.SingletonClass;
+import org.david.bad_engine.core.logic.GameRenderLogic;
+import org.david.bad_engine.core.logic.GameUpdateLogic;
 import org.david.bad_engine.input.InputManager;
 import org.david.bad_engine.input.KeyboardListener;
 import org.david.bad_engine.input.MouseInputListener;
@@ -38,19 +40,21 @@ public final class Game extends JPanel {
     // Managers goes here.
     private final InputManager inputManager;
     private final Renderer renderer;
+    private final GameUpdateLogic gameUpdateLogic;
 
     /**
      * Constructs a {@code Game} object,
      */
-    private Game() {
+    private Game(GameUpdateLogic updateLogic, GameRenderLogic renderLogic) {
         Game.font_m6x11plus = createFont("/font/m6x11plus.ttf");
         Game.randomGenerator = new Random(GameLoop.generateRandomSeed());
 
         final KeyboardListener keyboardListener = KeyboardListener.getInstance();
         final MouseInputListener mouseInputListener = MouseInputListener.getInstance();
         this.inputManager = InputManager.getInstance(keyboardListener, mouseInputListener);
+        this.gameUpdateLogic = updateLogic;
 
-        renderer = Renderer.getInstance();
+        renderer = Renderer.getInstance(renderLogic);
 
         super.setPreferredSize(Toolkit.getDefaultToolkit().getScreenSize());
         super.setDoubleBuffered(true);
@@ -68,9 +72,9 @@ public final class Game extends JPanel {
      *
      * @return the static reference of this class.
      */
-    public static Game getInstance() {
+    public static Game getInstance(GameUpdateLogic updateLogic, GameRenderLogic renderLogic) {
         if (instance == null) {
-            instance = new Game();
+            instance = new Game(updateLogic, renderLogic);
         }
         return instance;
     }
