@@ -2,7 +2,6 @@ package org.david.bad_engine.input;
 
 import com.mrgoddavid.vector.Vector2d;
 import org.david.bad.code.annotation.SingletonClass;
-import org.david.bad_engine.core.Game;
 
 import javax.swing.*;
 import java.awt.event.KeyEvent;

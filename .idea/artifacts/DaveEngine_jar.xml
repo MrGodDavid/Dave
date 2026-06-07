@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="DaveEngine:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/DaveEngine_jar</output-path>
+    <root id="archive" name="DaveEngine.jar">
+      <element id="module-output" name="DaveEngine" />
+    </root>
+  </artifact>
+</component>
